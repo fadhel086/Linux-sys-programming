@@ -19,8 +19,6 @@ int add_data(dll_t *dll, void *data)
 	new_node->right = NULL;
 	new_node->data = data;
 
-
-
 	// Insert to end of dll_t
 	if ( !dll->head ) {
 		dll->head = new_node;

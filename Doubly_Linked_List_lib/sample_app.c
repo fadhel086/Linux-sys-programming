@@ -17,7 +17,6 @@ void print(struct person *member)
 	printf("Sex: %c\n", member->sex);
 }
 
-
 void dump_db(dll_t *db)
 {
 	if (!db || !db->head) {
