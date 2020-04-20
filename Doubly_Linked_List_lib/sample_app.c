@@ -1,3 +1,5 @@
+/* Program to test the dll library */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +11,11 @@ typedef struct person {
 	unsigned char sex;
 } person_t;
 
+void die_out(char *err_msg)
+{
+	printf("%s", err_msg);
+	exit(EXIT_FAILURE);
+}
 void print(struct person *member)
 {
 	printf("\n");
@@ -33,7 +40,8 @@ void dump_db(dll_t *db)
 }
 
 int main() {
-
+	
+	int ret;
 	dll_t *family_db = NULL;
 
 	// Initialize first person
@@ -62,14 +70,40 @@ int main() {
 
 	// Initialize DB
 	family_db = init_dll();
+	if (!family_db) {
+		die_out("init_dll() failed.\n");
+	}
 	
-	add_data(family_db, person1);
-	add_data(family_db, person2);
-	add_data(family_db, person3);
-	add_data(family_db, person4);
+	// Populate the data base
+	if ( add_data(family_db, person1) == -1 )
+		die_out("add_data() failed.\n");
+		
+	if ( add_data(family_db, person2) == -1)
+		die_out("add_data() failed.\n");
 
-	// Let's test the DB
+	if ( add_data(family_db, person3) == -1 )
+		die_out("add_data() failed.\n");
+
+	if ( add_data(family_db, person4) == -1 )
+		die_out("add_data() failed.\n");
+
+	// Let's see the filled DB
 	dump_db(family_db);
-	
+
+	if ( remove_data_from_dll_by_data_ptr(family_db, person2) == 0) {
+		printf("Removed an entry\n");
+		dump_db(family_db);
+			
+	} else {
+		die_out("remove_data_from_dll failed.\n");
+	}
+
+	// Let's drain the db
+	drain_dll(family_db);
+	if (is_dll_empty(family_db) == 0) {
+		printf("empty Database\n");
+	} else {
+		die_out("drain_dll failed.\n");
+	}	
 	return 0;
 }
