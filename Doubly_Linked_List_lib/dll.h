@@ -18,10 +18,10 @@ dll_t *init_dll();
 /* Add's data to the doubly linked list
    returns 0 on success, -1 on error
 */
-int add_data(dll_t *dll, void *data);
+int add_data(dll_t *dll, void *app_data);
 
 /* return 0 on success and -1 on failure */
-int remove_data_from_dll_by_data_ptr(dll_t *dll, void *data);
+int remove_data_from_dll_by_data_ptr(dll_t *dll, void *app_data);
 
 /* return 0 if empty, -1 if not empty */
 int is_dll_empty(dll_t *dll);

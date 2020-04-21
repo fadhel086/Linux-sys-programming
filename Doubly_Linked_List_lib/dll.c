@@ -8,16 +8,16 @@ dll_t *init_dll()
 	return dll;
 }
 
-int add_data(dll_t *dll, void *data)
+int add_data(dll_t *dll, void *app_data)
 {
-	if (!dll || !data)
+	if (!dll || !app_data)
 		return -1;
 
 	// Initialize the node
 	dll_node_t *new_node = calloc(1, sizeof(dll_node_t));
 	new_node->left = NULL;
 	new_node->right = NULL;
-	new_node->data = data;
+	new_node->data = app_data;
 
 	// Insert to end of dll_t
 	if ( !dll->head ) {

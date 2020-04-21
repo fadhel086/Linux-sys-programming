@@ -1,16 +1,16 @@
 #include <stdlib.h>
 #include "dll.h"
 
-int remove_data_from_dll_by_data_ptr(dll_t *dll, void *data)
+int remove_data_from_dll_by_data_ptr(dll_t *dll, void *app_data)
 {
 	dll_node_t *remove_node = NULL;
 
-	if (!dll || !dll->head || !data)
+	if (!dll || !dll->head || !app_data)
 		return -1;
 
 	remove_node = dll->head;
 	// if data is in head_node, remove and return
-	if (remove_node->data == data) {
+	if (remove_node->data == app_data) {
 		dll->head = dll->head->right;
 		dll->head->left = NULL;
 		free(remove_node);
@@ -20,7 +20,7 @@ int remove_data_from_dll_by_data_ptr(dll_t *dll, void *data)
 	
 	while(remove_node)
 	{
-		if (remove_node->data == data) {
+		if (remove_node->data == app_data) {
 			remove_node->left->right = remove_node->right;
 			remove_node->right->left = remove_node->left;
 			free(remove_node);
