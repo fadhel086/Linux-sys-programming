@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "dll.h"
+#include <dll.h>
 
 typedef struct person {
 	char name[24];
@@ -24,6 +24,7 @@ void print(struct person *member)
 	printf("Sex: %c\n", member->sex);
 }
 
+/*
 void dump_db(dll_t *db)
 {
 	if (!db || !db->head) {
@@ -38,6 +39,7 @@ void dump_db(dll_t *db)
 		head = head->right;
 	}
 }
+*/
 
 int main() {
 	
@@ -88,7 +90,7 @@ int main() {
 		die_out("add_data() failed.\n");
 
 	// Let's see the filled DB
-	dump_db(family_db);
+	//dump_db(family_db);
 
 	if ( remove_data_from_dll_by_data_ptr(family_db, person2) == 0) {
 		printf("Removed an entry\n");
