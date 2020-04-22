@@ -10,7 +10,8 @@ typedef struct dll_node_ {
 
 typedef struct dll_ {
 	dll_node_t *head;
-	void (*print_node)(void *node);
+	void (*print_node)(void *);
+	int (*comparison_callback)(void *, void *);
 }dll_t;
 
 /* Initialize the doubly linked list head
@@ -18,6 +19,8 @@ typedef struct dll_ {
 */
 dll_t *init_dll();
 
+/* register comparison callback */
+void register_comparison_callback(dll_t *dll, int (*call_back)(void *, void *));
 /* register print node callbacl */
 void register_print_node_callback(dll_t *dll, void (*call_back)(void *));
 
