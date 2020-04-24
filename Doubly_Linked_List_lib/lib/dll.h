@@ -46,4 +46,16 @@ int is_dll_empty(dll_t *dll);
 /* delete all nodes from dll, but do not free appln data */
 void drain_dll(dll_t *dll);
 
+
+/* Macro to iterate over the DLL */
+#define ITERATE_LIST_BEGIN(list_ptr, node_ptr)		\
+{							\
+	dll_node_t *_node_ptr = NULL;			\
+	node_ptr = list_ptr->head;			\
+	for(; node_ptr != NULL; node_ptr = _node_ptr) {	\
+		_node_ptr = node_ptr->right;		\
+		/* App code comes here */		\
+
+#define ITERATE_LIST_END }}
+
 #endif

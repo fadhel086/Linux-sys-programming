@@ -1,4 +1,4 @@
-TARGET:sample1
+TARGET:sample3
 
 
 sample1: sample_app.o libdll.a
@@ -7,9 +7,15 @@ sample1: sample_app.o libdll.a
 sample2: programmable_lib/application.o libdll.a
 	gcc programmable_lib/application.o -L . -ldll -o programmable_lib/sample2
 
+sample3: iterative_macros/application.o libdll.a
+	gcc iterative_macros/application.o -L . -ldll -o iterative_macros/sample3
+
+iterative_macros/application.o: iterative_macros/application.c
+	gcc -c -I lib iterative_macros/application.c -o iterative_macros/application.o
+
 programmable_lib/application.o: programmable_lib/application.c
 	gcc -c -I lib programmable_lib/application.c -o programmable_lib/application.o
-	
+
 sample_app.o:sample_app.c
 	gcc -c -I lib sample_app.c -o sample_app.o
 
@@ -23,8 +29,8 @@ dll_util.o: lib/dll_util.c
 	gcc -c -I lib lib/dll_util.c -o dll_util.o
 
 clean:
-	rm *.o \
-	sample1 \
-	programmable_lib/sample2 \
-	programmable_lib/*.o \
-	libdll.a
+	rm $(TARGET) \
+	libdll.a \
+	Makefile~
+	find . -iname "*.o" -delete
+	find . -iname "*.~*" -delete
